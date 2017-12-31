@@ -34,50 +34,55 @@ game.PlayerEntity = me.Entity.extend({
    * update the player pos
    */
   update : function (dt) {
-    if (me.input.isKeyPressed('left')) {
-      // flip the sprite on horizontal axis
-      this.renderable.flipX(true);
+    if(me.input.isKeyPressed('right') || me.input.isKeyPressed('left') ||
+        me.input.isKeyPressed('up') || me.input.isKeyPressed('down')){
+        if (me.input.isKeyPressed('left')) {
+          // flip the sprite on horizontal axis
+          this.renderable.flipX(true);
 
-      // update the entity velocity
-      this.body.vel.x -= this.body.accel.x * me.timer.tick;
+          // update the entity velocity
+          this.body.vel.x -= this.body.accel.x * me.timer.tick;
 
-      // change to the walking animation
-      if (!this.renderable.isCurrentAnimation("walk")) {
-        this.renderable.setCurrentAnimation("walk");
-      }
+          // change to the walking animation
+          if (!this.renderable.isCurrentAnimation("walk")) {
+            this.renderable.setCurrentAnimation("walk");
+          }
+        }
+        else {
+          // unflip the sprite
+          this.renderable.flipX(false);
+
+          // update the entity velocity
+          this.body.vel.x += this.body.accel.x * me.timer.tick;
+
+          // change to the walking animation
+          if (!this.renderable.isCurrentAnimation("walk")) {
+            this.renderable.setCurrentAnimation("walk");
+          }
+        }
+
+        if (me.input.isKeyPressed('up')) {
+
+          // update the entity velocity
+          this.body.vel.y -= this.body.accel.y * me.timer.tick;
+
+          // change to the walking animation
+          if (!this.renderable.isCurrentAnimation("walk")) {
+            this.renderable.setCurrentAnimation("walk");
+          }
+        }
+        else {
+
+          // update the entity velocity
+          this.body.vel.y += this.body.accel.y * me.timer.tick;
+
+          // change to the walking animation
+          if (!this.renderable.isCurrentAnimation("walk")) {
+            this.renderable.setCurrentAnimation("walk");
+          }
+        }
     }
-    else if (me.input.isKeyPressed('right')) {
-      // unflip the sprite
-      this.renderable.flipX(false);
-
-      // update the entity velocity
-      this.body.vel.x += this.body.accel.x * me.timer.tick;
-
-      // change to the walking animation
-      if (!this.renderable.isCurrentAnimation("walk")) {
-        this.renderable.setCurrentAnimation("walk");
-      }
-    }
-    else if (me.input.isKeyPressed('up')) {
-
-      // update the entity velocity
-      this.body.vel.y -= this.body.accel.y * me.timer.tick;
-
-      // change to the walking animation
-      if (!this.renderable.isCurrentAnimation("walk")) {
-        this.renderable.setCurrentAnimation("walk");
-      }
-    }
-    else if (me.input.isKeyPressed('down')) {
-
-      // update the entity velocity
-      this.body.vel.y += this.body.accel.y * me.timer.tick;
-
-      // change to the walking animation
-      if (!this.renderable.isCurrentAnimation("walk")) {
-        this.renderable.setCurrentAnimation("walk");
-      }
-    }
+    
     else {
       this.body.vel.x = 0;
       this.body.vel.y = 0;
