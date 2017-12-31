@@ -12,6 +12,8 @@ game.PlayerEntity = me.Entity.extend({
     // set the default horizontal & vertical speed (accel vector)
     this.body.setVelocity(3, 15);
 
+    this.body.gravity = 0;
+
     // set the display to follow our position on both axis
     me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
@@ -56,8 +58,29 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.setCurrentAnimation("walk");
       }
     }
+    else if (me.input.isKeyPressed('up')) {
+
+      // update the entity velocity
+      this.body.vel.y -= this.body.accel.y * me.timer.tick;
+
+      // change to the walking animation
+      if (!this.renderable.isCurrentAnimation("walk")) {
+        this.renderable.setCurrentAnimation("walk");
+      }
+    }
+    else if (me.input.isKeyPressed('down')) {
+
+      // update the entity velocity
+      this.body.vel.y += this.body.accel.y * me.timer.tick;
+
+      // change to the walking animation
+      if (!this.renderable.isCurrentAnimation("walk")) {
+        this.renderable.setCurrentAnimation("walk");
+      }
+    }
     else {
       this.body.vel.x = 0;
+      this.body.vel.y = 0;
 
       // change to the standing animation
       this.renderable.setCurrentAnimation("stand");
