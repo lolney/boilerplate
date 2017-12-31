@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="17">
- <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216" columns="18">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="19">
+ <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216">
   <image source="../img/map/New Project (1).png" width="600" height="400"/>
  </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
@@ -110,15 +110,15 @@
  <objectgroup name="Player" offsetx="80" offsety="168">
   <object id="1" name="mainPlayer" x="496" y="2480" width="32" height="64">
    <properties>
-    <property name="framewidth" type="int" value="64"/>
+    <property name="framewidth" value="64"/>
     <property name="image" value="gripe_run_right"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="collision">
-  <object id="12" name="collisionTop" x="160" y="160" width="2880" height="160"/>
-  <object id="13" name="collisionBottom" x="160" y="2880" width="2880" height="160"/>
-  <object id="14" name="collisionLeft" x="160" y="320" width="160" height="2560"/>
-  <object id="16" name="collisionRight" x="2880" y="320" width="160" height="2560"/>
+ <objectgroup name="Collision">
+  <object id="12" x="160" y="160" width="2880" height="160"/>
+  <object id="13" x="160" y="2880" width="2880" height="160"/>
+  <object id="14" x="160" y="320" width="160" height="2560"/>
+  <object id="16" x="2880" y="320" width="160" height="2560"/>
  </objectgroup>
 </map>
