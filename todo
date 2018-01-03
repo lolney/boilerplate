@@ -1,0 +1,31 @@
+Priority list:
+- (Apparent location of character shifts when facing left/right)
+- Add trees to game world
+- Pathfinding/automated movement of characters
+- Character inventory
+- Chopping of trees
+
+Texteditor: 
+- Interface:
+	- Save and apply to game world
+	- Show or hide
+	- When active, game/editor should capture input and no input should go to the other one
+		- https://melonjs.github.io/melonJS/docs/me.input.html
+	- Default to 1/3 of the screen
+		- Start on the side for certain screens
+			- https://developers.google.com/web/fundamentals/design-and-ux/responsive/
+		- Add toggles for bottom/side/hide
+	- Capture console
+
+- Code should:
+	- Extend character code
+		- https://github.com/parasyte/jay-extend
+	- Not spawn new objects or affect game state except through characters
+
+- Gameplay:
+	- Advance skills
+	- Acquire resources
+	- Buy/own/sell plots of land?
+	
+- Marketplace:
+	- Sell/buy resources

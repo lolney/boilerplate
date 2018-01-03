@@ -28,6 +28,9 @@ var game = {
         // Initialize the audio.
         me.audio.init("mp3,ogg");
 
+        // Plugins
+        me.plugin.register(aStarPlugin, "astar");
+
         // set and load all resources.
         // (this will also automatically switch to the loading screen)
         me.loader.preload(game.resources, this.loaded.bind(this));
