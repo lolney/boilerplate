@@ -110,11 +110,12 @@ game.NPCEntity = game.CharacterEntity.extend({
      * select a random destination on the map
      */
     selectDestination : function(){
-        var bounds = me.game.world.getBounds();
+        /*var bounds = me.game.world.getBounds();
         // Random point in the world
         var x = Math.floor((Math.random() * bounds._width));
         var y = Math.floor((Math.random() * bounds._height));
-        return me.astar.search(this.pos.x,this.pos.y, x,y);
+        return me.astar.search(this.pos.x,this.pos.y, x,y);*/
+        return [];
     },
 
     update : function(){
