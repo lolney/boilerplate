@@ -108,10 +108,10 @@
 </data>
  </layer>
  <objectgroup name="Player" offsetx="80" offsety="168">
-  <object id="1" name="mainPlayer" x="496" y="2480" width="32" height="32">
+  <object id="1" name="mainPlayer" x="496" y="2480" width="32" height="64">
    <properties>
     <property name="framewidth" value="64"/>
-    <property name="image" value="rightWalk"/>
+    <property name="image" value="rightWalk2"/>
    </properties>
   </object>
  </objectgroup>
