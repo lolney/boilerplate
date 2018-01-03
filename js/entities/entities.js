@@ -6,7 +6,7 @@ game.CharacterEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
 
         // set the default horizontal & vertical speed (accel vector)
-        this.body.setVelocity(3, 15);
+        this.body.setVelocity(5, 5);
 
         this.body.gravity = 0;
 
