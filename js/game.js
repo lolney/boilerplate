@@ -46,6 +46,9 @@ var game = {
       // register our player entity in the object pool
       me.pool.register("mainPlayer", game.PlayerEntity);
 
+      // register NPC entity in the object pool
+      me.pool.register("NPC1", game.NPCEntity);
+
       // enable the keyboard
       me.input.bindKey(me.input.KEY.LEFT,  "left");
       me.input.bindKey(me.input.KEY.RIGHT, "right");
