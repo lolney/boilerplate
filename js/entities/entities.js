@@ -157,22 +157,10 @@ game.PlayerEntity = game.CharacterEntity.extend({
     this.renderable.setCurrentAnimation("stand");
   },
 
-  /**
-     * select a random destination on the map
-     */
-    selectDestination : function(){
-        var bounds = me.game.world.getBounds();
-        // Random point in the world
-        var x = Math.floor((Math.random() * bounds._width));
-        var y = Math.floor((Math.random() * bounds._height));
-        return me.astar.search(this.pos.x,this.pos.y, x,y);
-    },
-
   /*
    * update the player pos
    */
   update : function (dt) {
-    this.selectDestination();
     var directions = [];
     if(me.input.isKeyPressed('right') || me.input.isKeyPressed('left') ||
         me.input.isKeyPressed('up') || me.input.isKeyPressed('down')){
