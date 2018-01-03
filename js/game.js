@@ -1,3 +1,11 @@
+var myCodeMirror = CodeMirror(document.body, {
+  value: "function myScript(){alert('test');}\n",
+  mode:  "javascript"
+});
+
+myCodeMirror.on("change", function(x){
+    eval(myCodeMirror.getValue());
+});
 
 /* Game namespace */
 var game = {
@@ -12,7 +20,7 @@ var game = {
     // Run on page load.
     "onload" : function () {
         // Initialize the video.
-        if (!me.video.init(960, 640, {wrapper : "screen", scale : "auto"})) {
+        if (!me.video.init(960, 640, {wrapper : "screen", scale : "flex-width"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }

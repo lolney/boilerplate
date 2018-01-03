@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
+          'lib/codemirror.js',
           'lib/melonjs.js',
           'lib/plugins/**/*.js',
           'js/game.js',
