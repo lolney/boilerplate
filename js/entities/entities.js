@@ -2,17 +2,20 @@ game.CharacterEntity = me.Entity.extend({
 
     init : function (x, y, settings) {
         // call the constructor
+        settings.anchorPoint = new me.Vector2d(0.5, 0.5);
         this._super(me.Entity, 'init', [x, y, settings]);
 
         // set the default horizontal & vertical speed (accel vector)
         this.body.setVelocity(3, 15);
 
         this.body.gravity = 0;
+
+        this.renderable.anchorPoint = new me.Vector2d(0.5, 0.5);
     },
 
     move : function(directions, dt){
-        this.body.accel.x = .3;
-        this.body.accel.y = 1;
+        //this.renderable.anchorPoint = new me.Vector2d(0.5, 0.5);
+
         if(directions.length == 0){
             this.body.vel.x = 0;
             this.body.vel.y = 0;
@@ -111,7 +114,7 @@ game.PlayerEntity = game.CharacterEntity.extend({
     this.alwaysUpdate = true;
 
     // define a basic walking animation (using all frames)
-    this.renderable.addAnimation("walk",  [0, 1, 2, 3, 4, 5, 6, 7]);
+    this.renderable.addAnimation("walk",  [0, 1, 2, 3]);
 
     // define a standing animation (using the first frame)
     this.renderable.addAnimation("stand",  [0]);
