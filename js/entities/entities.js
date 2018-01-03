@@ -6,11 +6,9 @@ game.CharacterEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
 
         // set the default horizontal & vertical speed (accel vector)
-        this.body.setVelocity(5, 5);
-
         this.body.gravity = 0;
-
-        this.renderable.anchorPoint = new me.Vector2d(0.5, 0.5);
+        this.body.setVelocity(4, 7);
+        
     },
 
     move : function(directions, dt){
@@ -91,8 +89,44 @@ game.CharacterEntity = me.Entity.extend({
 
 game.NPCEntity = game.CharacterEntity.extend({
 
-    moveTo : function(x,y){
-        me.astar.search(this.pos.x,this.pos.y, x,y);
+    init : function (x, y, settings) {
+        // call the constructor
+        this._super(game.CharacterEntity, 'init', [x, y, settings]);
+
+        // define a basic walking animation (using all frames)
+        this.renderable.addAnimation("walk",  [0, 1, 2, 3]);
+
+        // define a standing animation (using the first frame)
+        this.renderable.addAnimation("stand",  [0]);
+
+        // set the standing animation as default
+        this.renderable.setCurrentAnimation("stand");
+
+        // set movement queue
+        this.moveQueue = [];
+    },
+
+    /**
+     * select a random destination on the map
+     */
+    selectDestination : function(){
+        var bounds = me.game.world.getBounds();
+        // Random point in the world
+        var x = Math.floor((Math.random() * bounds._width));
+        var y = Math.floor((Math.random() * bounds._height));
+        return me.astar.search(this.pos.x,this.pos.y, x,y);
+    },
+
+    update : function(){
+        directions = [];
+        if(this.moveQueue.length > 0){
+            this.move(directions, dt);
+            return true;
+        }
+        else{
+            this.moveQueue = this.selectDestination();
+            return false;
+        }
     }
 });
 
@@ -123,10 +157,22 @@ game.PlayerEntity = game.CharacterEntity.extend({
     this.renderable.setCurrentAnimation("stand");
   },
 
+  /**
+     * select a random destination on the map
+     */
+    selectDestination : function(){
+        var bounds = me.game.world.getBounds();
+        // Random point in the world
+        var x = Math.floor((Math.random() * bounds._width));
+        var y = Math.floor((Math.random() * bounds._height));
+        return me.astar.search(this.pos.x,this.pos.y, x,y);
+    },
+
   /*
    * update the player pos
    */
   update : function (dt) {
+    this.selectDestination();
     var directions = [];
     if(me.input.isKeyPressed('right') || me.input.isKeyPressed('left') ||
         me.input.isKeyPressed('up') || me.input.isKeyPressed('down')){
