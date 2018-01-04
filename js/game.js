@@ -29,7 +29,9 @@ var game = {
         me.audio.init("mp3,ogg");
 
         // Plugins
-        me.plugin.register(aStarPlugin, "astar");
+        // First two arguments are width/height of world
+        me.plugin.register(pathFindingPlugin, "pathFinding",
+          3200, 3200, 'JumpPointFinder', 1, 'lib/plugins/pathfinding_webworkers/');
 
         // set and load all resources.
         // (this will also automatically switch to the loading screen)

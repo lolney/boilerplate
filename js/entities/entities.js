@@ -102,6 +102,8 @@ game.NPCEntity = game.CharacterEntity.extend({
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 
+        // Not awaiting path from webworker
+        this.awaiting = false;
         // set movement queue
         this.moveQueue = [];
     },
@@ -110,22 +112,83 @@ game.NPCEntity = game.CharacterEntity.extend({
      * select a random destination on the map
      */
     selectDestination : function(){
-        /*var bounds = me.game.world.getBounds();
+        // Have to consider effects of having multiple NPCs 
+        // (and therefore multiple listeners) at once
+        me.pathFinding.addListener((e) => {
+            var object = e.data;
+            console.log(object);
+            this.moveQueue = object.data;
+            this.awaiting = false;
+        });
+
+        var bounds = me.game.world.getBounds();
         // Random point in the world
         var x = Math.floor((Math.random() * bounds._width));
         var y = Math.floor((Math.random() * bounds._height));
-        return me.astar.search(this.pos.x,this.pos.y, x,y);*/
+        var message = {
+            name: "findPath",
+            data: {initialPosition:{
+                x:this.pos.x,y:this.pos.y},
+                endPosition: {x:x, y:y},
+                zLevel: 0,
+                offset: 0
+            }
+        };
+        this.awaiting = true;
+        me.pathFinding.postMessage(message);
         return [];
     },
 
-    update : function(){
+    update : function(dt){
         directions = [];
         if(this.moveQueue.length > 0){
+            next = this.moveQueue.pop();
+            if(next[0] > this.pos.x){
+                directions.push('right')
+            } else if(next[0] < this.pos.x){
+                directions.push('left')
+            }
+            if(next[1] > this.pos.y){
+                directions.push('up')
+            } else if(next[1] < this.pos.y){
+                directions.push('down')
+            }
             this.move(directions, dt);
+
+            // Find out if we moved enough yet
+            for(var i = 0; i < directions.length; i++){
+                var x = directions[i];
+                if(x == 'right'){
+                    if(next[0] > this.pos.x){
+                        this.moveQueue.push(next);
+                        break;
+                    }
+                } 
+                else if(x == 'left'){
+                    if(next[0] < this.pos.x){
+                        this.moveQueue.push(next);
+                        break;
+                    }
+                }
+                else if(x == 'up'){
+                    if(next[1] > this.pos.y){
+                        this.moveQueue.push(next);
+                        break;
+                    } 
+                }
+                else if(x == 'down'){
+                    if(next[1] < this.pos.y){
+                        this.moveQueue.push(next);
+                        break;
+                    }
+                }
+            }
             return true;
         }
         else{
-            this.moveQueue = this.selectDestination();
+            if(!this.awaiting) {
+                this.moveQueue = this.selectDestination();
+            }
             return false;
         }
     }

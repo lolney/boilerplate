@@ -1,0 +1,3 @@
+[submodule "lib/plugins/pathfinding_webworkers"]
+	path = lib/plugins/pathfinding_webworkers
+	url = https://github.com/ldd/melonjs-pathfinding.git

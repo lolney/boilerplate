@@ -1,4 +1,5 @@
 Priority list:
+- Handle collision of non-player characters - can push properly
 - Add trees to game world
 - Pathfinding/automated movement of characters
 - Character inventory
@@ -28,3 +29,8 @@ Texteditor:
 	
 - Marketplace:
 	- Sell/buy resources
+
+Technical considerations:
+- Running Melonjs on server/client simultaneously:
+https://groups.google.com/forum/?fromgroups=#!searchin/melonjs/node/melonjs/NalOXGh097Y/Aik19xq7H7IJ
+- With https://groups.google.com/forum/#!topic/melonjs/Zib-GrrGagY
