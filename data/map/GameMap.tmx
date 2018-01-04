@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="24">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="30">
  <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../img/map/New Project (1).png" width="600" height="400"/>
  </tileset>
@@ -120,6 +120,27 @@
    <properties>
     <property name="framewidth" type="int" value="64"/>
     <property name="image" value="gripe_run_right"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Rock">
+  <object id="24" x="880" y="2256" width="32" height="32">
+   <properties>
+    <property name="framewidth" type="int" value="32"/>
+    <property name="image" value="Rock1"/>
+   </properties>
+  </object>
+  <object id="25" x="1208" y="2152" width="32" height="32">
+   <properties>
+    <property name="framewidth" type="int" value="32"/>
+    <property name="image" value="Rock2"/>
+   </properties>
+  </object>
+  <object id="26" x="616" y="1776"/>
+  <object id="29" x="1224" y="2040" width="32" height="32">
+   <properties>
+    <property name="framewidth" type="int" value="32"/>
+    <property name="image" value="Rock3"/>
    </properties>
   </object>
  </objectgroup>

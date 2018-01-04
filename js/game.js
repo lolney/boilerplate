@@ -49,6 +49,15 @@ var game = {
       // register NPC entity in the object pool
       me.pool.register("NPC1", game.NPCEntity);
 
+      // register Rock1 entity in the object pool
+      me.pool.register("Rock1", game.RockEntity);
+
+      // register Rock2 entity in the object pool
+      me.pool.register("Rock2", game.RockEntity);
+
+       // register Rock3 entity in the object pool
+      me.pool.register("Rock3", game.RockEntity);
+
       // enable the keyboard
       me.input.bindKey(me.input.KEY.LEFT,  "left");
       me.input.bindKey(me.input.KEY.RIGHT, "right");
