@@ -136,9 +136,9 @@
     <property name="image" value="Rock3"/>
    </properties>
   </object>
-  <object id="31" name="Rock1" x="968" y="2080" width="64" height="64">
+  <object id="31" name="Rock1" x="968" y="2080" width="32" height="32">
    <properties>
-    <property name="framewidth" type="int" value="64"/>
+    <property name="framewidth" type="int" value="32"/>
     <property name="image" value="Rock1"/>
    </properties>
   </object>
