@@ -1,5 +1,6 @@
 Priority list:
 - Handle collision of non-player characters - can push properly
+- Add collision checking to selecting path destination
 - Add trees to game world
 - Pathfinding/automated movement of characters
 - Character inventory

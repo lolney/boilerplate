@@ -116,8 +116,8 @@ game.NPCEntity = game.CharacterEntity.extend({
         // (and therefore multiple listeners) at once
         me.pathFinding.addListener((e) => {
             var object = e.data;
-            console.log(object);
-            this.moveQueue = object.data;
+            this.moveQueue = object.data.filter((x) => {return Math.random() < .1;}).reverse();
+            console.log(this.moveQueue);
             this.awaiting = false;
         });
 
@@ -136,7 +136,6 @@ game.NPCEntity = game.CharacterEntity.extend({
         };
         this.awaiting = true;
         me.pathFinding.postMessage(message);
-        return [];
     },
 
     update : function(dt){
@@ -149,35 +148,37 @@ game.NPCEntity = game.CharacterEntity.extend({
                 directions.push('left')
             }
             if(next[1] > this.pos.y){
-                directions.push('up')
-            } else if(next[1] < this.pos.y){
                 directions.push('down')
+            } else if(next[1] < this.pos.y){
+                directions.push('up')
             }
+            console.log(next, this.pos, directions);
             this.move(directions, dt);
 
+            var d = 3;
             // Find out if we moved enough yet
             for(var i = 0; i < directions.length; i++){
                 var x = directions[i];
                 if(x == 'right'){
-                    if(next[0] > this.pos.x){
+                    if(next[0] - d > this.pos.x){
                         this.moveQueue.push(next);
                         break;
                     }
                 } 
                 else if(x == 'left'){
-                    if(next[0] < this.pos.x){
+                    if(next[0] + d < this.pos.x){
                         this.moveQueue.push(next);
                         break;
                     }
                 }
-                else if(x == 'up'){
-                    if(next[1] > this.pos.y){
+                else if(x == 'down'){
+                    if(next[1] - d > this.pos.y){
                         this.moveQueue.push(next);
                         break;
                     } 
                 }
-                else if(x == 'down'){
-                    if(next[1] < this.pos.y){
+                else if(x == 'up'){
+                    if(next[1] + d < this.pos.y){
                         this.moveQueue.push(next);
                         break;
                     }
@@ -187,9 +188,9 @@ game.NPCEntity = game.CharacterEntity.extend({
         }
         else{
             if(!this.awaiting) {
-                this.moveQueue = this.selectDestination();
+                this.selectDestination();
             }
-            return false;
+            return true;
         }
     }
 });
@@ -200,41 +201,15 @@ game.RockEntity = game.CharacterEntity.extend({
         // call the constructor
         this._super(game.CharacterEntity, 'init', [x, y, settings]);
 
-        // define a basic walking animation (using all frames)
-        this.renderable.addAnimation("walk",  [0, 1, 2, 3]);
-
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0]);
 
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
-
-        // set movement queue
-        this.moveQueue = [];
-    },
-
-    /**
-     * select a random destination on the map
-     */
-    selectDestination : function(){
-        /*var bounds = me.game.world.getBounds();
-        // Random point in the world
-        var x = Math.floor((Math.random() * bounds._width));
-        var y = Math.floor((Math.random() * bounds._height));
-        return me.astar.search(this.pos.x,this.pos.y, x,y);*/
-        return [];
     },
 
     update : function(){
-        directions = [];
-        if(this.moveQueue.length > 0){
-            this.move(directions, dt);
-            return true;
-        }
-        else{
-            this.moveQueue = this.selectDestination();
-            return false;
-        }
+        return false;
     }
 });
 
