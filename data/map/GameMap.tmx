@@ -124,20 +124,13 @@
   </object>
  </objectgroup>
  <objectgroup name="Rock">
-  <object id="24" x="880" y="2256" width="32" height="32">
-   <properties>
-    <property name="framewidth" type="int" value="32"/>
-    <property name="image" value="Rock1"/>
-   </properties>
-  </object>
-  <object id="25" x="1208" y="2152" width="32" height="32">
+  <object id="25" name="Rock2" x="1208" y="2152" width="32" height="32">
    <properties>
     <property name="framewidth" type="int" value="32"/>
     <property name="image" value="Rock2"/>
    </properties>
   </object>
-  <object id="26" x="616" y="1776"/>
-  <object id="29" x="1224" y="2040" width="32" height="32">
+  <object id="29" name="Rock3" x="1224" y="2040" width="32" height="32">
    <properties>
     <property name="framewidth" type="int" value="32"/>
     <property name="image" value="Rock3"/>

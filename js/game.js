@@ -50,7 +50,7 @@ var game = {
       me.pool.register("NPC1", game.NPCEntity);
 
       // register Rock1 entity in the object pool
-      me.pool.register("Rock1", game.RockEntity);
+      
 
       // register Rock2 entity in the object pool
       me.pool.register("Rock2", game.RockEntity);

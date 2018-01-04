@@ -131,6 +131,50 @@ game.NPCEntity = game.CharacterEntity.extend({
     }
 });
 
+game.RockEntity = game.CharacterEntity.extend({
+
+    init : function (x, y, settings) {
+        // call the constructor
+        this._super(game.CharacterEntity, 'init', [x, y, settings]);
+
+        // define a basic walking animation (using all frames)
+        this.renderable.addAnimation("walk",  [0, 1, 2, 3]);
+
+        // define a standing animation (using the first frame)
+        this.renderable.addAnimation("stand",  [0]);
+
+        // set the standing animation as default
+        this.renderable.setCurrentAnimation("stand");
+
+        // set movement queue
+        this.moveQueue = [];
+    },
+
+    /**
+     * select a random destination on the map
+     */
+    selectDestination : function(){
+        /*var bounds = me.game.world.getBounds();
+        // Random point in the world
+        var x = Math.floor((Math.random() * bounds._width));
+        var y = Math.floor((Math.random() * bounds._height));
+        return me.astar.search(this.pos.x,this.pos.y, x,y);*/
+        return [];
+    },
+
+    update : function(){
+        directions = [];
+        if(this.moveQueue.length > 0){
+            this.move(directions, dt);
+            return true;
+        }
+        else{
+            this.moveQueue = this.selectDestination();
+            return false;
+        }
+    }
+});
+
 /**
  * a player entity
  */
