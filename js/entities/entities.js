@@ -225,11 +225,11 @@ game.NPCEntity = game.CharacterEntity.extend({
     }
 });
 
-game.RockEntity = game.CharacterEntity.extend({
+game.RockEntity = me.Entity.extend({
 
     init : function (x, y, settings) {
         // call the constructor
-        this._super(game.CharacterEntity, 'init', [x, y, settings]);
+        this._super(me.Entity, 'init', [x, y, settings]);
 
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0]);
@@ -243,11 +243,11 @@ game.RockEntity = game.CharacterEntity.extend({
     }
 });
 
-game.TreeEntity = game.CharacterEntity.extend({
+game.TreeEntity = me.Entity.extend({
 
     init : function (x, y, settings) {
         // call the constructor
-        this._super(game.CharacterEntity, 'init', [x, y, settings]);
+        this._super(me.Entity, 'init', [x, y, settings]);
 
         // define a basic chopping animation (using all frames)
         this.renderable.addAnimation("chop",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 100);
@@ -261,11 +261,11 @@ game.TreeEntity = game.CharacterEntity.extend({
         this.dt = 0;
 
         // Particles
-        var image = me.loader.getImage('area01_bkg0');
+        var image = me.loader.getImage('log_particle');
         var emitter = new me.ParticleEmitter(784, 2624, {
             image: image,
-            width: 25,
-            //height: 25,
+            width: 32,
+            height: 32,
             minLife: 1000,
             maxLife: 3000,
             totalParticles: 300,
