@@ -60,6 +60,9 @@ var game = {
        // register Rock3 entity in the object pool
       me.pool.register("Rock3", game.RockEntity);
 
+      // register Tree1 entity in the object pool
+      me.pool.register("Tree1", game.TreeEntity);
+
       // enable the keyboard
       me.input.bindKey(me.input.KEY.LEFT,  "left");
       me.input.bindKey(me.input.KEY.RIGHT, "right");

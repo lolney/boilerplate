@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="32">
- <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="33">
+ <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../img/map/New Project (1).png" width="600" height="400"/>
  </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
@@ -116,10 +116,18 @@
   </object>
  </objectgroup>
  <objectgroup name="NPC">
-  <object id="19" name="NPC1" x="1312" y="2656" width="32" height="64">
+  <object id="19" name="NPC1" x="784" y="2624" width="32" height="64">
    <properties>
     <property name="framewidth" value="64"/>
     <property name="image" value="gripe_run_right"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Tree">
+  <object id="32" name="Tree1" x="640" y="2216" width="96" height="96">
+   <properties>
+    <property name="framewidth" type="int" value="96"/>
+    <property name="image" value="tree1"/>
    </properties>
   </object>
  </objectgroup>

@@ -243,6 +243,30 @@ game.RockEntity = game.CharacterEntity.extend({
     }
 });
 
+game.TreeEntity = game.CharacterEntity.extend({
+
+    init : function (x, y, settings) {
+        // call the constructor
+        this._super(game.CharacterEntity, 'init', [x, y, settings]);
+
+        // define a basic chopping animation (using all frames)
+        this.renderable.addAnimation("chop",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
+
+        // define a standing animation (using the first frame)
+        this.renderable.addAnimation("stand",  [0]);
+
+        // set the standing animation as default
+        this.renderable.setCurrentAnimation("chop");
+    },
+
+    update : function(dt){
+        var frame = this.renderable.getCurrentAnimationFrame();
+        this.renderable.setAnimationFrame(frame+1);
+        this.body.update(dt);
+        return true;
+    }
+});
+
 /**
  * a player entity
  */
