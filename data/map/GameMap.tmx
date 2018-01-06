@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="32">
- <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216" columns="18">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="32">
+ <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216">
   <image source="../img/map/New Project (1).png" width="600" height="400"/>
  </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
@@ -118,7 +118,7 @@
  <objectgroup name="NPC">
   <object id="19" name="NPC1" x="1312" y="2656" width="32" height="64">
    <properties>
-    <property name="framewidth" type="int" value="64"/>
+    <property name="framewidth" value="64"/>
     <property name="image" value="gripe_run_right"/>
    </properties>
   </object>
@@ -126,27 +126,27 @@
  <objectgroup name="Rock">
   <object id="25" name="Rock2" x="1208" y="2152" width="32" height="32">
    <properties>
-    <property name="framewidth" type="int" value="32"/>
+    <property name="framewidth" value="32"/>
     <property name="image" value="Rock2"/>
    </properties>
   </object>
   <object id="29" name="Rock3" x="1224" y="2040" width="32" height="32">
    <properties>
-    <property name="framewidth" type="int" value="32"/>
+    <property name="framewidth" value="32"/>
     <property name="image" value="Rock3"/>
    </properties>
   </object>
   <object id="31" name="Rock1" x="968" y="2080" width="32" height="32">
    <properties>
-    <property name="framewidth" type="int" value="32"/>
+    <property name="framewidth" value="32"/>
     <property name="image" value="Rock1"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="Collision">
-  <object id="12" x="160" y="160" width="2880" height="160"/>
-  <object id="13" x="160" y="2880" width="2880" height="160"/>
-  <object id="14" x="160" y="320" width="160" height="2560"/>
-  <object id="16" x="2880" y="320" width="160" height="2560"/>
+  <object id="12" x="-19" y="-2" width="3302" height="322"/>
+  <object id="13" x="0" y="2880" width="3280" height="487"/>
+  <object id="14" x="0" y="320" width="321" height="2566"/>
+  <object id="16" x="2880" y="320" width="420" height="2560"/>
  </objectgroup>
 </map>

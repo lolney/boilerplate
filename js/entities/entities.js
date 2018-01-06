@@ -109,6 +109,29 @@ game.NPCEntity = game.CharacterEntity.extend({
         this.moveQueue = [];
     },
 
+    chooseRandomPoint : function(){
+        var bounds = me.game.world.getBounds();
+        var oldy = this.pos.y; var oldx = this.pos.x;
+        var x; var y;
+        var respobj = new me.collision.ResponseObject();
+
+        // Choose a point we can actually reach
+        do {
+            x = Math.floor((Math.random() * bounds._width));
+            y = Math.floor((Math.random() * bounds._height));
+            
+            this.pos.x = x; this.pos.y = y;
+            console.log([x,y]);
+            
+            var collides = me.collision.check(this, respobj)
+           
+        } while(respobj.aInB || respobj.bInA || collides);
+
+        this.pos.y = oldy; this.pos.x = oldx;
+        
+        return [x,y]
+    },
+
     /**
      * select a random destination on the map
      */
@@ -126,15 +149,12 @@ game.NPCEntity = game.CharacterEntity.extend({
             this.listenerAdded = true;
         }
 
-        var bounds = me.game.world.getBounds();
-        // Random point in the world
-        var x = Math.floor((Math.random() * bounds._width));
-        var y = Math.floor((Math.random() * bounds._height));
+        point = this.chooseRandomPoint();
         var message = {
             name: "findPath",
             data: {initialPosition:{
                 x:this.pos.x,y:this.pos.y},
-                endPosition: {x:x, y:y},
+                endPosition: {x:point[0], y:point[1]},
                 zLevel: 0,
                 offset: 0
             }
