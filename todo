@@ -1,7 +1,10 @@
 Priority list:
 - Handle collision of non-player characters - can push properly
 - Add collision checking to selecting path destination
+- Get rock/log particles working
 - Add trees to game world
+- Add random spawning of objects
+- Add nearest neighbor alogorithm using the melonjs quadtree
 - Pathfinding/automated movement of characters
 - Character inventory
 - Chopping of trees
@@ -27,6 +30,7 @@ Texteditor:
 	- Advance skills
 	- Acquire resources
 	- Buy/own/sell plots of land?
+		- Use resources to build stuff
 	
 - Marketplace:
 	- Sell/buy resources

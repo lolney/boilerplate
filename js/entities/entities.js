@@ -259,6 +259,23 @@ game.TreeEntity = game.CharacterEntity.extend({
         this.renderable.setCurrentAnimation("chop");
 
         this.dt = 0;
+
+        // Particles
+        var image = me.loader.getImage('area01_bkg0');
+        var emitter = new me.ParticleEmitter(784, 2624, {
+            image: image,
+            width: 25,
+            //height: 25,
+            minLife: 1000,
+            maxLife: 3000,
+            totalParticles: 300,
+            angleVariation: 0.3490658503988659,
+            frequency: 50
+        });
+        emitter.name = 'wood';
+        emitter.pos.z = 2;
+        me.game.world.addChild(emitter);
+        emitter.streamParticles();
     },
 
     update : function(dt){
@@ -266,7 +283,6 @@ game.TreeEntity = game.CharacterEntity.extend({
         this.dt = dt + this.dt;
         if (this.dt > 200) {
           this.renderable.setAnimationFrame(frame+1);
-          this.body.update(dt);
           this.dt = 0;
         }
         return true;
