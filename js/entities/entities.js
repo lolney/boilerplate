@@ -104,6 +104,7 @@ game.NPCEntity = game.CharacterEntity.extend({
 
         // Not awaiting path from webworker
         this.awaiting = false;
+        this.listenerAdded = false;
         // set movement queue
         this.moveQueue = [];
     },
@@ -114,12 +115,16 @@ game.NPCEntity = game.CharacterEntity.extend({
     selectDestination : function(){
         // Have to consider effects of having multiple NPCs 
         // (and therefore multiple listeners) at once
-        me.pathFinding.addListener((e) => {
-            var object = e.data;
-            this.moveQueue = object.data.filter((x) => {return Math.random() < .1;}).reverse();
-            console.log(this.moveQueue);
-            this.awaiting = false;
-        });
+        if(!this.listenerAdded){
+            me.pathFinding.addListener((e) => {
+                var object = e.data;
+                // TODO: Do the filtering on the pathfinding end?
+                this.moveQueue = object.data.filter((x) => {return Math.random() < .1;}).reverse();
+                console.log(this.moveQueue);
+                this.awaiting = false;
+            });
+            this.listenerAdded = true;
+        }
 
         var bounds = me.game.world.getBounds();
         // Random point in the world
@@ -138,10 +143,14 @@ game.NPCEntity = game.CharacterEntity.extend({
         me.pathFinding.postMessage(message);
     },
 
+    /**
+    *   Move along the path provided by the pathfinder
+    */
     update : function(dt){
         directions = [];
         if(this.moveQueue.length > 0){
             next = this.moveQueue.pop();
+            // Choose direction in which to move
             if(next[0] > this.pos.x){
                 directions.push('right')
             } else if(next[0] < this.pos.x){
@@ -155,7 +164,8 @@ game.NPCEntity = game.CharacterEntity.extend({
             console.log(next, this.pos, directions);
             this.move(directions, dt);
 
-            var d = 3;
+            // tolerance
+            var d = 5;
             // Find out if we moved enough yet
             for(var i = 0; i < directions.length; i++){
                 var x = directions[i];
@@ -184,14 +194,14 @@ game.NPCEntity = game.CharacterEntity.extend({
                     }
                 }
             }
-            return true;
         }
         else{
             if(!this.awaiting) {
                 this.selectDestination();
             }
-            return true;
         }
+
+        return true;
     }
 });
 
