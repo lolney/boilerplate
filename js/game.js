@@ -39,6 +39,36 @@ var game = {
     },
 
     /**
+    * Choose a random location 
+    */
+    chooseRandomPoint : function() {
+      var bounds = me.game.world.getBounds();
+
+      x = Math.floor((Math.random() * bounds._width));
+      y = Math.floor((Math.random() * bounds._height));
+
+      return [x,y];
+    },
+
+    _spawn : function() {
+      var objects = game.objectArray;
+      for(var i = 0; i < objects.length; i++){
+        var obj = objects[i];
+        var x; var y;
+        if(obj.location){
+          x = obj.location[0];
+          y = obj.location[1]
+        } else{
+          // TODO: collision check? Probably have to spawn
+          // the object prematurely and take it out if it collides
+          var loc = this.chooseRandomPoint();
+          x = loc[0]; y = loc[1];
+        }
+        me.game.world.addChild(new obj.objclass(x,y,obj.props), 2);
+      }
+    },
+
+    /**
      * callback when everything is loaded
      */
     loaded : function () {
@@ -52,7 +82,8 @@ var game = {
       me.pool.register("NPC1", game.NPCEntity);
 
       // register Rock1 entity in the object pool
-      me.pool.register("Rock1", game.RockEntity);
+      //me.pool.register("Rock1", game.RockEntity);
+      this._spawn();
 
       // register Rock2 entity in the object pool
       me.pool.register("Rock2", game.RockEntity);

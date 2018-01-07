@@ -11,6 +11,13 @@ game.CharacterEntity = me.Entity.extend({
         
     },
 
+    nearestNeighbor : function(){
+        // Solve for current square in quadtree
+        // When solved, check vs. distance to 
+        // closest point on each boundary line;
+        // If closer, try again in adjoining square
+    },
+
     move : function(directions, dt){
         //this.renderable.anchorPoint = new me.Vector2d(0.5, 0.5);
 
@@ -110,18 +117,16 @@ game.NPCEntity = game.CharacterEntity.extend({
     },
 
     chooseRandomPoint : function(){
-        var bounds = me.game.world.getBounds();
         var oldy = this.pos.y; var oldx = this.pos.x;
         var x; var y;
         var respobj = new me.collision.ResponseObject();
 
         // Choose a point we can actually reach
         do {
-            x = Math.floor((Math.random() * bounds._width));
-            y = Math.floor((Math.random() * bounds._height));
+            var point = game.chooseRandomPoint();
             
-            this.pos.x = x; this.pos.y = y;
-            console.log([x,y]);
+            this.pos.x = point[0]; this.pos.y = point[1];
+            console.log(point);
             
             var collides = me.collision.check(this, respobj)
            
