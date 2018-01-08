@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="33">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="34">
  <tileset firstgid="1" name="WallFloor" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../img/map/New Project (1).png" width="600" height="400"/>
  </tileset>
@@ -128,6 +128,12 @@
    <properties>
     <property name="framewidth" type="int" value="96"/>
     <property name="image" value="tree1"/>
+   </properties>
+  </object>
+  <object id="33" name="Tree2" x="872" y="2280" width="96" height="96" rotation="1">
+   <properties>
+    <property name="framewidth" type="int" value="97"/>
+    <property name="image" value="tree2"/>
    </properties>
   </object>
  </objectgroup>
