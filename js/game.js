@@ -94,6 +94,9 @@ var game = {
       // register Tree1 entity in the object pool
       me.pool.register("Tree1", game.TreeEntity);
 
+      // register Tree2 entity in the object pool
+      me.pool.register("Tree2", game.TreeEntity);
+
       // enable the keyboard
       me.input.bindKey(me.input.KEY.LEFT,  "left");
       me.input.bindKey(me.input.KEY.RIGHT, "right");
