@@ -241,6 +241,9 @@ game.RockEntity = me.Entity.extend({
 
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
+
+        this.isPersistent = true;
+        this.alwaysUpdate = true;
     },
 
     update : function(){
