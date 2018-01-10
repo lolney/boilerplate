@@ -58,16 +58,27 @@ var game = {
         var count = obj.count || 1;
 
         for(var j=0; j<count; j++){
+          var gameObject = null;
           if(obj.location){
             x = obj.location[0];
             y = obj.location[1];
+            gameObject = me.pool.pull(obj.props.name, x, y, obj.props);
           } else{
-            // TODO: collision check? Probably have to spawn
-            // the object prematurely and take it out if it collides
-            var loc = this.chooseRandomPoint();
-            x = loc[0]; y = loc[1];
+            // Collision check: spawn the object prematurely
+            // and take it out if it collides
+            do {
+              if(gameObject){
+                me.game.world.removeChild(gameObject);
+              }
+              var loc = this.chooseRandomPoint();
+              x = loc[0]; y = loc[1];
+              gameObject = me.pool.pull(obj.props.name, x, y, obj.props);
+              var collides = me.collision.check(gameObject);
+              if(collides){
+                console.log("collides");
+              }
+            } while(collides);
           }
-          var gameObject = me.pool.pull(obj.props.name, x, y, obj.props);
           me.game.world.addChild(gameObject, obj.props.z);
         }
 
