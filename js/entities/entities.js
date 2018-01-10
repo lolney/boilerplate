@@ -257,8 +257,10 @@ game.TreeEntity = me.Entity.extend({
         // call the constructor
         this._super(me.Entity, 'init', [x, y, settings]);
 
+        var frames = 20;
+
         // define a basic chopping animation (using all frames)
-        this.renderable.addAnimation("chop",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 100);
+        this.renderable.addAnimation("chop",  Array.from(new Array(frames), (x,i) => i), 100);
 
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0]);
