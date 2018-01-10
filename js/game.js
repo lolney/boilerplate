@@ -101,6 +101,7 @@ var game = {
       me.pool.register("Tree1", game.TreeEntity);
 
       me.pool.register("Tree2", game.TreeEntity);
+      
       this._spawn(objects);
 
       // enable the keyboard
