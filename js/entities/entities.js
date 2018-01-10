@@ -118,12 +118,12 @@ game.NPCEntity = game.CharacterEntity.extend({
 
     chooseRandomPoint : function(){
         var oldy = this.pos.y; var oldx = this.pos.x;
-        var x; var y;
+        var point;
         var respobj = new me.collision.ResponseObject();
 
         // Choose a point we can actually reach
         do {
-            var point = game.chooseRandomPoint();
+            point = game.chooseRandomPoint();
             
             this.pos.x = point[0]; this.pos.y = point[1];
             console.log(point);
@@ -134,7 +134,7 @@ game.NPCEntity = game.CharacterEntity.extend({
 
         this.pos.y = oldy; this.pos.x = oldx;
         
-        return [x,y]
+        return point;
     },
 
     /**

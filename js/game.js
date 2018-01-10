@@ -41,28 +41,35 @@ var game = {
     },
 
     /**
-    * Choose a random location 
+    * Choose a random location within the game bounds
     */
     chooseRandomPoint : function() {
       
-      x = Math.floor(Math.random() * this.bounds[0]);
-      y = Math.floor(Math.random() * this.bounds[1]);
+      var x = Math.floor(Math.random() * this.bounds[0]);
+      var y = Math.floor(Math.random() * this.bounds[1]);
 
       return [x,y];
     },
 
+    /**
+    * Spawn all objects as defined in objects.js
+    */
     _spawn : function(objects) {
       for(var i = 0; i < objects.length; i++){
         var obj = objects[i];
-        var x; var y;
         var count = obj.count || 1;
 
         for(var j=0; j<count; j++){
           var gameObject = null;
+
+          // Object has location defined
           if(obj.location){
-            x = obj.location[0];
-            y = obj.location[1];
-            gameObject = me.pool.pull(obj.props.name, x, y, obj.props);
+            gameObject = me.pool.pull(
+              obj.props.name,
+              obj.location[0],
+              obj.location[1],
+              obj.props);
+            me.game.world.addChild(gameObject, obj.props.z);
           } else{
             // Collision check: spawn the object prematurely
             // and take it out if it collides
@@ -71,15 +78,14 @@ var game = {
                 me.game.world.removeChild(gameObject);
               }
               var loc = this.chooseRandomPoint();
-              x = loc[0]; y = loc[1];
-              gameObject = me.pool.pull(obj.props.name, x, y, obj.props);
-              var collides = me.collision.check(gameObject);
-              if(collides){
-                console.log("collides");
-              }
-            } while(collides);
+              gameObject = me.pool.pull(
+                obj.props.name,
+                loc[0], loc[1],
+                obj.props);
+              me.game.world.addChild(gameObject, obj.props.z);
+            } while(me.collision.check(gameObject));
           }
-          me.game.world.addChild(gameObject, obj.props.z);
+          
         }
 
       }
@@ -89,7 +95,6 @@ var game = {
      * callback when everything is loaded
      */
     loaded : function () {
-      var objects = game.initObjectArray();
       // set the "Play/Ingame" Screen Object
       me.state.set(me.state.PLAY, new game.PlayScreen());
 
@@ -113,7 +118,9 @@ var game = {
 
       me.pool.register("Tree2", game.TreeEntity);
       
-      this._spawn(objects);
+      // Defer adding these objects until everything else is added - 
+      // Better way to do this?
+      window.setTimeout(function(){game._spawn(game.initObjectArray());}, 500);
 
       // enable the keyboard
       me.input.bindKey(me.input.KEY.LEFT,  "left");
